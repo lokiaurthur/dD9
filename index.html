@@ -2,180 +2,240 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dUMDOG's Calamity Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile Site</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --primary-color: #0d0d0d;
-      --secondary-color: #6e00ff;
-      --accent-color: #ff004f;
-      --text-color: #ffffff;
+      --primary-color: #1a1a2e;
+      --red: #3620c5;
+      --blue: #e80f0f;
+      --pink: #2e1d35;
+      --button-bg: rgba(255, 255, 255, 0.1);
+      --button-border: rgba(47, 36, 36, 0.25);
+      --text-color: #321e1e;
+      --glow-red: #2c2423;
+      --glow-blue: #fefefe;
+      --glow-pink: #9757b7;
+      --transition-time: 0.4s;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
+    html, body {
       height: 100%;
+      width: 100%;
       overflow-x: hidden;
       color: var(--text-color);
-      /* Set background GIF here */
-      background: url(bck.gif) no-repeat center center fixed;
+      background: url('bck.gif') no-repeat center center fixed;
       background-size: cover;
     }
 
     body {
-      position: relative;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
+      min-height: 100vh;
+      padding: 20px;
+      background-attachment: fixed;
     }
 
-    .button, .social-link {
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      padding: 15px 30px;
-      margin: 10px;
+    .button {
+      background: var(--button-bg);
+      border: 1.8px solid var(--button-border);
+      border-radius: 20px;
+      padding: 18px 40px;
+      margin: 14px;
       cursor: pointer;
-      transition: all 0.4s ease-in-out;
-      text-align: center;
-      color: #220808;
-      text-decoration: none;
-      display: inline-block;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 0 20px var(--accent-color);
+      color: var(--text-color);
       font-weight: 600;
-      animation: pulse 3s infinite;
+      font-size: 1.15rem;
+      text-align: center;
+      text-shadow: 0 0 6px rgba(0,0,0,0.4);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 0 12px var(--glow-blue), 0 0 20px var(--glow-pink);
+      transition: background var(--transition-time), transform var(--transition-time), box-shadow var(--transition-time);
+      user-select: none;
     }
 
-    .button:hover, .social-link:hover {
+    .button:hover {
       background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.08);
-      box-shadow: 0 0 25px var(--secondary-color);
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 15px var(--accent-color); }
-      50% { box-shadow: 0 0 30px var(--secondary-color); }
-      100% { box-shadow: 0 0 15px var(--accent-color); }
+      transform: scale(1.12) rotate(2deg);
+      box-shadow: 0 0 18px var(--glow-red), 0 0 28px var(--glow-pink);
     }
 
     .popup {
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 30px;
-      display: none;
-      z-index: 10;
       width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 30px var(--accent-color);
+      max-width: 420px;
+      background: rgba(25, 25, 40, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 24px;
+      border: 2px solid var(--button-border);
+      padding: 30px 35px;
+      box-shadow: 0 0 30px var(--glow-blue), 0 0 50px var(--glow-pink);
+      transform: translate(-50%, -50%) scale(0.85);
       opacity: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      color: var(--text-color);
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+      z-index: 999;
     }
 
     .popup.show {
-      display: block;
       opacity: 1;
+      pointer-events: auto;
       transform: translate(-50%, -50%) scale(1);
     }
 
     .popup h2 {
-      margin-bottom: 15px;
-      font-size: 26px;
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 18px;
       text-align: center;
-      color: var(--accent-color);
+      color: #eee;
     }
 
     .popup p {
-      margin-bottom: 8px;
-      line-height: 1.5;
+      color: #ddd;
     }
 
-    .overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      z-index: 5;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    /* Updated social buttons */
+    #social .socials-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
-    .overlay.show {
-      display: block;
-      opacity: 1;
+    #social a.social-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 12px 18px;
+      border-radius: 12px;
+      color: #ddd;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.3s ease;
+    }
+
+    #social a.social-link:hover {
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 16px rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    #social a.social-link i {
+      font-size: 1.3rem;
+      color: var(--blue);
+      text-shadow: 0 0 6px var(--glow-blue);
+      transition: color 0.3s ease;
+    }
+
+    #social a.social-link:hover i {
+      color: var(--pink);
+      text-shadow: 0 0 14px var(--glow-pink);
     }
 
     .close-btn {
-      background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      margin-top: 20px;
-      cursor: pointer;
-      border-radius: 12px;
       width: 100%;
+      padding: 14px 0;
+      margin-top: 22px;
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(45deg, var(--text-color), var(--red), var(--text-color));
+      background-size: 300% 300%;
+      color: #fef6f6;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 18px var(--glow-pink);
       transition: transform 0.3s ease;
-      font-weight: bold;
+      animation: gradientShift 8s ease infinite;
     }
+
     .close-btn:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 30px var(--glow-red);
     }
 
-    .socials-container {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .social-link i {
-      margin-right: 10px;
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .profile-pic {
-      width: 100px;
-      height: 100px;
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       object-fit: cover;
-      margin: 0 auto 15px;
-      display: block;
-      border: 2px solid var(--accent-color);
+      border: 3px solid var(--blue);
+      box-shadow: 0 0 15px var(--glow-blue), 0 0 30px var(--glow-pink);
+    }
+
+    .signature {
+      position: fixed;
+      bottom: 16px;
+      right: 20px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.6rem;
+      color: var(--pink);
+      text-shadow: 0 0 6px var(--glow-pink), 0 0 12px var(--glow-pink);
+      user-select: none;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.85;
     }
 
     @media (max-width: 600px) {
-      .button { padding: 10px 20px; font-size: 14px; }
-      .popup { padding: 20px; }
+      .button {
+        padding: 14px 28px;
+        font-size: 1rem;
+      }
+      .popup {
+        max-width: 95%;
+        padding: 25px 20px;
+      }
+      .close-btn {
+        font-size: 1rem;
+      }
+      .signature {
+        font-size: 1.3rem;
+        bottom: 12px;
+        right: 12px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Removed video and audio -->
 
   <div class="button" onclick="openPopup('about')">About Me</div>
   <div class="button" onclick="openPopup('social')">Social</div>
   <div class="button" onclick="openPopup('genshin')">Genshin Account</div>
   <div class="button" onclick="openPopup('games')">Other Game Accounts</div>
 
-  <div class="overlay" id="overlay" onclick="closePopup()"></div>
-
   <div class="popup" id="about">
     <h2>About Me</h2>
-    <img class="profile-pic" src="pro.jpg" alt="Profile Picture">
+    <img class="profile-pic" src="pro.jpg" alt="Profile Picture" />
     <p><strong>Name:</strong> dUMDOG</p>
     <p><strong>Age:</strong> 21</p>
     <p><strong>Interests:</strong> Games, Music, Anime, Manhwa</p>
@@ -209,15 +269,43 @@
     <button class="close-btn" onclick="closePopup()">Close</button>
   </div>
 
+  <audio id="click-sound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_10f6945508.mp3"></audio>
+
+  <div class="signature">dnd.loki</div>
+
   <script>
-    function openPopup(id) {
-      document.getElementById(id).classList.add('show');
-      document.getElementById('overlay').classList.add('show');
+    const clickSound = document.getElementById('click-sound');
+    const popups = document.querySelectorAll('.popup');
+    let clickCount = 0;
+    let clickTimer;
+
+    function playClickSound() {
+      if (clickSound) {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      }
     }
-    function closePopup() {
-      const popups = document.querySelectorAll('.popup');
+
+    function openPopup(id) {
+      playClickSound();
       popups.forEach(p => p.classList.remove('show'));
-      document.getElementById('overlay').classList.remove('show');
+      document.getElementById(id).classList.add('show');
+      clickCount++;
+      if (clickTimer) clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => {
+        clickCount = 0;
+      }, 1000);
+      if (clickCount >= 5) {
+        const ids = Array.from(popups).map(p => p.id);
+        const randomId = ids[Math.floor(Math.random() * ids.length)];
+        document.getElementById(randomId).classList.add('show');
+        clickCount = 0;
+      }
+    }
+
+    function closePopup() {
+      playClickSound();
+      popups.forEach(p => p.classList.remove('show'));
     }
   </script>
 </body>
